@@ -1,0 +1,24 @@
+name : Picksell
+version : 1
+build-type: Simple
+cabal-version: >= 1.10
+
+executable Picksell
+  Main-Is: Main.hs
+  Hs-Source-Dirs: src/
+  Build-Depends:
+    base == 4.*,
+    bytestring == 0.10.*,
+    text >= 1.2.2.0,
+    haskell-gi-base == 0.23.0,
+    gi-gtk == 3.0.*,
+    gi-gobject == 2.0.*,
+    gi-gdkpixbuf == 2.0.*,
+    gi-gdk == 3.0.*
+  Other-Modules:
+    CssStyle,
+    FileChooser,
+    Window,
+    Button
+  default-language: Haskell2010
+  ghc-Options: -w -threaded

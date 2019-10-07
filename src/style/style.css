@@ -1,0 +1,77 @@
+@define-color greyish rgba(10, 10, 10, 0.8);
+@define-color dark-greyish rgba(10, 10, 10, 0.1);
+@define-color darker-greyish rgba(10, 10, 10, 0.3);
+@define-color border-dark rgba(140,140,140, 0.4);
+@define-color solid-grey rgba(50,50,50,1);
+
+#body {
+    background-color: @greyish;
+    border-width: 6px;
+}
+
+
+#controls {
+    background-color: @dark-greyish;
+    border-color: @darker-greyish;
+    border-style: solid;
+    border-width: 0 0 0 6px;
+}
+
+
+
+
+
+
+
+
+#layers {
+    background-color: @dark-greyish;
+    border-color: @darker-greyish;
+    border-style: solid;
+    border-width: 0 6px 0 0;
+}
+
+#export,
+#import,
+.button {
+  border-color: @border-dark; 
+  border-width: 1px;
+  background-image: none;
+  color: rgba(140,140,140,1);
+  box-shadow: none;
+  text-shadow: none;
+  border-image-source: none;
+  margin: 10px;
+}
+
+#import {
+    margin-bottom: 5px;
+}
+
+#export:focus,
+#import:focus,
+.button {
+      outline-color: transparent;
+  outline-offset: 0px;
+  outline-width: 0px;
+  outline-style: none;
+  outline: none;
+
+}
+
+#export:hover,
+#import:hover,
+.button {
+      background-color: rgba(255, 255, 255, 0.1);
+
+}
+
+
+
+
+
+
+
+
+
+

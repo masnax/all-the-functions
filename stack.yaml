@@ -1,0 +1,7 @@
+resolver: lts-14.7
+extra-deps:
+    - haskell-gi-base-0.23.0
+    - gi-gtk-3.0.32
+    - gi-gobject-2.0.22
+    - gi-gdkpixbuf-2.0.23
+    - gi-gdk-3.0.22
