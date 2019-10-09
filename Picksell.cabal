@@ -17,7 +17,7 @@ executable Picksell
     gi-gdk == 3.0.*
   Other-Modules:
     CssStyle,
-    FileChooser,
+    Dialogue,
     Window,
     Button
   default-language: Haskell2010
