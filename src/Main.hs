@@ -7,7 +7,7 @@ import qualified GI.Gtk as Gtk
 import Data.GI.Base
 
 import qualified CssStyle as CSS
-import FileChooser
+import Dialogue
 import Window
 import Button
 

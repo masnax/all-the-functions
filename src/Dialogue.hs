@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings, OverloadedLabels #-}
 
-module FileChooser where
+module Dialogue where
 
 import qualified GI.Gtk as Gtk
 import qualified GI.GdkPixbuf as PB
@@ -11,12 +11,11 @@ import Button
 import Window
 
 selectFile builder = do
-    setButtonActive False builder
     setWindowActive False builder
     native <- new Gtk.FileChooserNative []
-    res <- Gtk.nativeDialogRun native
+    killDialog native builder
+    _ <- Gtk.nativeDialogRun native
     filename <-  Gtk.fileChooserGetFilename native
-    setButtonActive True builder
     setWindowActive True builder
     case filename of
         (Just file) -> do 
@@ -53,13 +52,12 @@ exportFile builder = do
 
     case maybePixbuf of 
         (Just pb) -> do 
-            setButtonActive False builder
             setWindowActive False builder
             native <- new Gtk.FileChooserNative []
+            killDialog native builder
             Gtk.fileChooserSetAction native Gtk.FileChooserActionSave
             res <- Gtk.nativeDialogRun native
             filename <-  Gtk.fileChooserGetFilename native
-            setButtonActive True builder
             setWindowActive True builder
             case filename of
                 (Just file) -> PB.pixbufSavev pb (file ++ ".png") "png" [] []

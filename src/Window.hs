@@ -13,3 +13,6 @@ setWindowActive status builder = do
     window <- getGTKWidget Gtk.Window "window" builder
     Gtk.widgetSetSensitive window status
 
+killDialog dialog builder = do 
+    window <- getGTKWidget Gtk.Window "window" builder
+    on window #destroy $ Gtk.nativeDialogDestroy dialog
