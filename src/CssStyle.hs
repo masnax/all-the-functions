@@ -1,21 +1,21 @@
 module CssStyle where
 
 import qualified Data.ByteString
-import qualified GI.Gdk
-import qualified GI.Gtk
+import qualified GI.Gdk as Gdk
+import qualified GI.Gtk as Gtk
 
-data GuiObjects = GuiObjects { window :: GI.Gtk.Window}
+data GuiObjects = GuiObjects { window :: Gtk.Window}
 
 applyCss :: GuiObjects -> IO ()
 applyCss guiObjects = do
-  maybeScreen         <- GI.Gdk.screenGetDefault
-  provider            <- GI.Gtk.cssProviderNew
+  maybeScreen         <- Gdk.screenGetDefault
+  provider            <- Gtk.cssProviderNew
   styleFile           <- return "./src/style/style.css"
   case maybeScreen of
     (Just screen) -> do
       styleFileContents    <- Data.ByteString.readFile styleFile
-      GI.Gtk.cssProviderLoadFromData provider styleFileContents
-      GI.Gtk.styleContextAddProviderForScreen screen provider (fromIntegral GI.Gtk.STYLE_PROVIDER_PRIORITY_USER)
+      Gtk.cssProviderLoadFromData provider styleFileContents
+      Gtk.styleContextAddProviderForScreen screen provider (fromIntegral Gtk.STYLE_PROVIDER_PRIORITY_USER)
     _ -> return ()
 
 

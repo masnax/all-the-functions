@@ -17,13 +17,6 @@
     border-width: 0 0 0 6px;
 }
 
-
-
-
-
-
-
-
 #layers {
     background-color: @dark-greyish;
     border-color: @darker-greyish;
@@ -31,6 +24,7 @@
     border-width: 0 6px 0 0;
 }
 
+#undo,
 #export,
 #import,
 .button {
@@ -48,6 +42,7 @@
     margin-bottom: 5px;
 }
 
+#undo,
 #export:focus,
 #import:focus,
 .button {
@@ -59,19 +54,10 @@
 
 }
 
+#undo,
 #export:hover,
 #import:hover,
 .button {
       background-color: rgba(255, 255, 255, 0.1);
 
 }
-
-
-
-
-
-
-
-
-
-

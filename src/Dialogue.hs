@@ -4,6 +4,7 @@ module Dialogue where
 
 import qualified GI.Gtk as Gtk
 import qualified GI.GdkPixbuf as PB
+import Data.GI.Base
 import GI.GObject
 import Data.Text
 import Data.Maybe
@@ -33,18 +34,14 @@ displayOnCanvas file builder = do
             -- HEH
             pbCopy <- PB.pixbufCopy pb
             _ <- Gtk.imageSetFromPixbuf canvas pbCopy
-            handleExporting builder
+            exportButton <- getGTKWidget  Gtk.Button "export" builder
+            on exportButton #clicked $ exportFile builder
             return ()
         _-> do
             print "That file wasn't an image"
             return ()
     return ()
 
-
-handleExporting builder = do
-    exportButton <- getGTKWidget  Gtk.Button "export" builder
-    Gtk.on exportButton #clicked $ exportFile builder
-    return ()
 
 exportFile builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder

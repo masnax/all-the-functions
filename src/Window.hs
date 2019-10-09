@@ -1,6 +1,8 @@
+{-# LANGUAGE OverloadedStrings, OverloadedLabels #-}
 module Window where
 
 import qualified GI.Gtk as Gtk
+import Data.GI.Base
 import Data.Maybe
 import Data.Text
 
