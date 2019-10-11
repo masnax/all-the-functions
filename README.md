@@ -15,4 +15,4 @@
 
 - ### RUN!
   - `cd all-the-functions`
-  - `stack exec ~/.local/bin/Picksell` all-the-functions
+  - `stack exec Picksell`
