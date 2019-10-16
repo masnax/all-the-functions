@@ -26,78 +26,78 @@
             <property name="label_yalign">0</property>
             <property name="shadow_type">none</property>
             <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkBox">
+                <object class="GtkAlignment">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkButton" id="undo">
-                        <property name="label" translatable="yes">Undo</property>
-                        <property name="name">undo</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">end</property>
-                        <property name="border_width">0</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="pack_type">start</property>
-                        <property name="position">0</property>
-                      </packing>
+                        <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                                <object class="GtkButton" id="undo">
+                                    <property name="label" translatable="yes">Undo</property>
+                                    <property name="name">undo</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">0</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="export">
+                                    <property name="label" translatable="yes">Export Image</property>
+                                    <property name="name">export</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">1</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="import">
+                                    <property name="label" translatable="yes">Import Image</property>
+                                    <property name="name">import</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">2</property>
+                                </packing>
+                            </child>
+                        </object>
                     </child>
-                    <child>
-                      <object class="GtkButton" id="export">
-                        <property name="label" translatable="yes">Export Image</property>
-                        <property name="name">export</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">end</property>
-                        <property name="border_width">0</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="pack_type">end</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="import">
-                        <property name="label" translatable="yes">Import Image</property>
-                        <property name="name">import</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">end</property>
-                        <property name="border_width">0</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="pack_type">end</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
+                </object>
             </child>
-          </object>
-          <packing>
+        </object>
+        <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkViewport">
+        </packing>
+    </child>
+    <child>
+        <object class="GtkViewport">
             <property name="width_request">223</property>
             <property name="height_request">223</property>
             <property name="visible">True</property>
@@ -122,14 +122,14 @@
                 </object>
             </child>
         </object>
-          <packing>
+        <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFrame" id="controls">
+        </packing>
+    </child>
+    <child>
+        <object class="GtkFrame" id="controls">
             <property name="name">controls</property>
             <property name="width_request">200</property>
             <property name="visible">True</property>
@@ -137,22 +137,106 @@
             <property name="label_xalign">0</property>
             <property name="shadow_type">none</property>
             <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
+                <object class="GtkAlignment">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                        <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                                <object class="GtkButton" id="rotate">
+                                    <property name="label" translatable="yes">Rotate</property>
+                                    <property name="name">rotate</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">0</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkBox" id="colorbox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="orientation">horizontal</property>
+                                    <child>
+                                        <object class="GtkButton" id="monochrome">
+                                            <property name="label" translatable="yes">Monochrome</property>
+                                            <property name="name">monochrome</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="valign">end</property>
+                                            <property name="border_width">0</property>
+                                        </object>
+                                        <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">True</property>
+                                            <property name="pack_type">start</property>
+                                            <property name="position">0</property>
+                                        </packing>
+                                    </child>
+                                    <child>
+                                        <object class="GtkColorButton" id="color">
+                                            <property name="name">color</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="valign">end</property>
+                                            <property name="border_width">0</property>
+                                        </object>
+                                        <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">1</property>
+                                        </packing>
+                                    </child>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">1</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="blur">
+                                    <property name="label" translatable="yes">Blur</property>
+                                    <property name="name">blur</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">2</property>
+                                </packing>
+                            </child>
+                        </object>
+                    </child>
+                </object>
             </child>
-          </object>
-          <packing>
+        </object>
+        <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
+        </packing>
     </child>
-  </object>
+</object>
+    </child>
+</object>
 </interface>
