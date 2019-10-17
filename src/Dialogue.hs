@@ -57,15 +57,21 @@ activateButtons builder = do
     return ()
 
 monochrome pb = do
-  bytestring <- PB.pixbufGetPixels pb
-  print (Data.ByteString.unpack bytestring)
-  c <- (PB.pixbufGetColorspace pb)
-  a <- (PB.pixbufGetHasAlpha pb)
-  s <- (PB.pixbufGetBitsPerSample pb)
-  w <- (PB.pixbufGetWidth pb)
-  h <- (PB.pixbufGetHeight pb)
-  r <- (PB.pixbufGetRowstride pb)
-  return (Just pb)
+    bytestring <- PB.pixbufGetPixels pb
+    let arr = (Data.ByteString.unpack bytestring)
+    print arr
+    return (Just pb)
+
+getPixbufMetadata pb = do  
+    bytestring <- PB.pixbufGetPixels pb
+    c <- (PB.pixbufGetColorspace pb)
+    a <- (PB.pixbufGetHasAlpha pb)
+    s <- (PB.pixbufGetBitsPerSample pb)
+    w <- (PB.pixbufGetWidth pb)
+    h <- (PB.pixbufGetHeight pb)
+    r <- (PB.pixbufGetRowstride pb)
+    return ((Data.ByteString.unpack bytestring), c, w, h)
+
 
 rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
