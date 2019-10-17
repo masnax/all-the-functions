@@ -23,6 +23,10 @@ main = do
     let guiObjects = CSS.GuiObjects { CSS.window = window}
 
     on importButton #clicked $ selectFile builder
+    on exportButton #clicked $ exportFile builder
+    setButtonActive "export" False builder 
+    initializeButtons builder
+    setConvolutionsActive False builder
     on window #destroy Gtk.mainQuit
     CSS.applyCss guiObjects
     Gtk.widgetShowAll window

@@ -39,11 +39,10 @@ displayOnCanvas file builder = do
             pbCopy <- PB.pixbufCopy pb
             _ <- Gtk.imageSetFromPixbuf canvas pbCopy
             -- activate buttons
-            exportButton <- getGTKWidget  Gtk.Button "export" builder
-            on exportButton #clicked $ exportFile builder
-            activateButtons builder
-
-            return ()
+            clearButton <- getGTKWidget  Gtk.Button "undo" builder
+            on clearButton #clicked $ resetImage file builder
+            setButtonActive "export" True builder
+            setConvolutionsActive True builder
         _-> do
             print "That file wasn't an image"
             return ()
