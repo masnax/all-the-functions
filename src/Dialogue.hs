@@ -62,7 +62,7 @@ monochrome pb = do
     print arr
     return (Just pb)
 
-getPixbufMetadata pb = do  
+getPixbufMetadata pb = do
     bytestring <- PB.pixbufGetPixels pb
     c <- (PB.pixbufGetColorspace pb)
     a <- (PB.pixbufGetHasAlpha pb)
@@ -70,11 +70,19 @@ getPixbufMetadata pb = do
     w <- (PB.pixbufGetWidth pb)
     h <- (PB.pixbufGetHeight pb)
     r <- (PB.pixbufGetRowstride pb)
-    return ((Data.ByteString.unpack bytestring), c, w, h)
+    return ((Data.ByteString.unpack bytestring), c, (w, h))
 
 
 rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
+
+Convolve:: mfilter -> pb -> [word]
+convolve mfilter pb =
+    (myarr, cs, (myWidth,MyHeight)) <- (getPixbufMetadata pb)
+    --let myarr = (fst3 myImg)
+    --let cs = (snd3 myImg)
+    --let (myWidth,myHeight) = ()
+
 
 convolute convolution builder = do
     -- get img using canvas
