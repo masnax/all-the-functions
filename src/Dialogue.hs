@@ -76,12 +76,11 @@ getPixbufMetadata pb = do
 rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
 
-convolve mfilter pb = do 
+convolve mfilter pb = do
     (myarr, cs, (myWidth, myHeight)) <- (getPixbufMetadata pb)
+    let grad_image = makeImageR cs (myWidth,myHeight) myarr
+    writeImage "../images/grad_attempt.png" grad_image
     return ()
-    --let myarr = (fst3 myImg)
-    --let cs = (snd3 myImg)
-    --let (myWidth,myHeight) = ()
 
 
 convolute convolution builder = do
