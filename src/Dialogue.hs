@@ -76,9 +76,9 @@ getPixbufMetadata pb = do
 rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
 
-Convolve:: mfilter -> pb -> [word]
-convolve mfilter pb =
-    (myarr, cs, (myWidth,MyHeight)) <- (getPixbufMetadata pb)
+convolve mfilter pb = do 
+    (myarr, cs, (myWidth, myHeight)) <- (getPixbufMetadata pb)
+    return ()
     --let myarr = (fst3 myImg)
     --let cs = (snd3 myImg)
     --let (myWidth,myHeight) = ()
