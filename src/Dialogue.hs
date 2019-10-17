@@ -8,6 +8,7 @@ import Data.GI.Base
 import GI.GObject
 import Data.Text
 import Data.Maybe
+import Data.ByteString
 import Button
 import Window
 
@@ -56,15 +57,15 @@ activateButtons builder = do
     return ()
 
 monochrome pb = do
-  bytestring <- PB.pixbufReadPixelBytes pb
+  bytestring <- PB.pixbufGetPixels pb
+  print (Data.ByteString.unpack bytestring)
   c <- (PB.pixbufGetColorspace pb)
   a <- (PB.pixbufGetHasAlpha pb)
   s <- (PB.pixbufGetBitsPerSample pb)
   w <- (PB.pixbufGetWidth pb)
   h <- (PB.pixbufGetHeight pb)
   r <- (PB.pixbufGetRowstride pb)
-  newPB <- PB.pixbufNewFromBytes bytestring c a s w h r
-  PB.pixbufCopy newPB
+  return (Just pb)
 
 rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
