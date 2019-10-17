@@ -28,6 +28,11 @@
 #rotate,
 #monochrome,
 #blur,
+#flipv,
+#fliph,
+#sharpen,
+#emboss,
+#outline,
 #undo,
 #export,
 #import,
@@ -42,32 +47,16 @@
   margin: 10px;
 }
 
-#monochrome {
-    border-radius: 6px 0px 0px 6px;
-    margin-right: 0px;
-}
-
-#color {
-    margin-left: 0px;
-    border-radius: 0px 6px 6px 0px;
-    box-shadow: none;
-    color: transparent;
-    background-color: transparent;
-    outline: none;
-    outline-width: 0px;
-    outline-color: transparent;
-}
-
-#colorbox {
-    padding: 0px;
-    margin: 0px;
-}
-
 #import {
     margin-bottom: 5px;
 }
 
-#undo,
+#undo:focus,
+#flipv:focus,
+#fliph:focus,
+#sharpen:focus,
+#emboss:focus,
+#outline:focus,
 #color:focus,
 #rotate:focus,
 #monochrome:focus,
@@ -83,7 +72,13 @@
 
 }
 
-#undo,
+#undo:hover,
+#flipv:hover,
+#fliph:hover,
+#sharpen:hover,
+#emboss:hover,
+#outline:hover,
+#undo:hover,
 #color:hover,
 #rotate:hover,
 #monochrome:hover,

@@ -20,6 +20,7 @@ executable Picksell
     CssStyle,
     Dialogue,
     Window,
-    Button
+    Button,
+    Convolutions
   default-language: Haskell2010
   ghc-Options: -w -threaded

@@ -36,7 +36,7 @@
                             <property name="orientation">vertical</property>
                             <child>
                                 <object class="GtkButton" id="undo">
-                                    <property name="label" translatable="yes">Undo</property>
+                                    <property name="label" translatable="yes">Clear</property>
                                     <property name="name">undo</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -163,49 +163,54 @@
                                 </packing>
                             </child>
                             <child>
-                                <object class="GtkBox" id="colorbox">
+                                <object class="GtkButton" id="flipv">
+                                    <property name="label" translatable="yes">Flip Vertical</property>
+                                    <property name="name">flipv</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">horizontal</property>
-                                    <child>
-                                        <object class="GtkButton" id="monochrome">
-                                            <property name="label" translatable="yes">Monochrome</property>
-                                            <property name="name">monochrome</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">True</property>
-                                            <property name="valign">end</property>
-                                            <property name="border_width">0</property>
-                                        </object>
-                                        <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="pack_type">start</property>
-                                            <property name="position">0</property>
-                                        </packing>
-                                    </child>
-                                    <child>
-                                        <object class="GtkColorButton" id="color">
-                                            <property name="name">color</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">True</property>
-                                            <property name="valign">end</property>
-                                            <property name="border_width">0</property>
-                                        </object>
-                                        <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">1</property>
-                                        </packing>
-                                    </child>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
                                 </object>
                                 <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">True</property>
                                     <property name="pack_type">start</property>
                                     <property name="position">1</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="fliph">
+                                    <property name="label" translatable="yes">Flip Horizontal</property>
+                                    <property name="name">fliph</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">2</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="monochrome">
+                                    <property name="label" translatable="yes">Monochrome</property>
+                                    <property name="name">monochrome</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">3</property>
                                 </packing>
                             </child>
                             <child>
@@ -222,7 +227,58 @@
                                     <property name="expand">False</property>
                                     <property name="fill">True</property>
                                     <property name="pack_type">start</property>
-                                    <property name="position">2</property>
+                                    <property name="position">4</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="sharpen">
+                                    <property name="label" translatable="yes">Sharpen</property>
+                                    <property name="name">sharpen</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">5</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="emboss">
+                                    <property name="label" translatable="yes">emboss</property>
+                                    <property name="name">emboss</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">6</property>
+                                </packing>
+                            </child>
+                            <child>
+                                <object class="GtkButton" id="outline">
+                                    <property name="label" translatable="yes">outline</property>
+                                    <property name="name">outline</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="valign">end</property>
+                                    <property name="border_width">0</property>
+                                </object>
+                                <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">start</property>
+                                    <property name="position">6</property>
                                 </packing>
                             </child>
                         </object>
