@@ -19,7 +19,7 @@ selectFile builder = do
     filename <-  Gtk.fileChooserGetFilename native
     setWindowActive True builder
     case filename of
-        (Just file) -> do 
+        (Just file) -> do
             displayOnCanvas file builder
             return ()
         _ -> return ()
@@ -28,14 +28,15 @@ selectFile builder = do
 displayOnCanvas file builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
     check <- PB.pixbufGetFileInfo file
-    case check of 
+    case check of
         (Just img, _, _) -> do
             pb <- PB.pixbufNewFromFileAtSize file 500 500
             -- HEH
             pbCopy <- PB.pixbufCopy pb
             _ <- Gtk.imageSetFromPixbuf canvas pbCopy
-            exportButton <- getGTKWidget  Gtk.Button "export" builder
-            on exportButton #clicked $ exportFile builder
+            -- activate buttons
+            activateButtons builder
+
             return ()
         _-> do
             print "That file wasn't an image"
@@ -43,12 +44,54 @@ displayOnCanvas file builder = do
     return ()
 
 
+activateButtons builder = do
+    exportButton <- getGTKWidget  Gtk.Button "export" builder
+    on exportButton #clicked $ exportFile builder
+
+    rotateButton <- getGTKWidget  Gtk.Button "rotate" builder
+    on rotateButton #clicked $ convolute rotate builder
+
+    monochromeButton <- getGTKWidget  Gtk.Button "monochrome" builder
+    on monochromeButton #clicked $ convolute monochrome builder
+    return ()
+
+monochrome pb = do
+  bytestring <- PB.pixbufReadPixelBytes pb
+  c <- (PB.pixbufGetColorspace pb)
+  a <- (PB.pixbufGetHasAlpha pb)
+  s <- (PB.pixbufGetBitsPerSample pb)
+  w <- (PB.pixbufGetWidth pb)
+  h <- (PB.pixbufGetHeight pb)
+  r <- (PB.pixbufGetRowstride pb)
+  newPB <- PB.pixbufNewFromBytes bytestring c a s w h r
+  PB.pixbufCopy newPB
+
+rotate pb = do
+  PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
+
+convolute convolution builder = do
+    -- get img using canvas
+    canvas <- getGTKWidget Gtk.Image "canvas" builder
+    maybePixbuf <- Gtk.imageGetPixbuf canvas
+
+    case maybePixbuf of
+    -- if type of pixbuf is equal to "just pb"
+      (Just pb) -> do
+        pbConvoluted <- (convolution pb)
+        -- once its rotated, show on canvas
+        _ <- Gtk.imageSetFromPixbuf canvas pbConvoluted
+        return ()
+      _ -> return ()
+    return ()
+
+
+
 exportFile builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
     maybePixbuf <- Gtk.imageGetPixbuf canvas
 
-    case maybePixbuf of 
-        (Just pb) -> do 
+    case maybePixbuf of
+        (Just pb) -> do
             setWindowActive False builder
             native <- new Gtk.FileChooserNative []
             killDialog native builder
