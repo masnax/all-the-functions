@@ -4,7 +4,7 @@ module Dialogue where
 
 import qualified GI.Gtk as Gtk
 import qualified GI.GdkPixbuf as PB
-import Graphics.Image as I
+import qualified Graphics.Image as I
 import Data.GI.Base
 import GI.GObject
 import Data.Text
@@ -12,6 +12,7 @@ import Data.Maybe
 import Data.ByteString
 import Button
 import Window
+
 
 selectFile builder = do
     setWindowActive False builder
@@ -32,6 +33,8 @@ displayOnCanvas file builder = do
     check <- PB.pixbufGetFileInfo file
     case check of
         (Just img, _, _) -> do
+            hidimg <- I.readImageRGB I.VU file
+            I.writeImage "./src/images/hidimg.png" hidimg
             pb <- PB.pixbufNewFromFileAtSize file 500 500
             -- HEH
             pbCopy <- PB.pixbufCopy pb
@@ -52,16 +55,15 @@ activateButtons builder = do
 
     rotateButton <- getGTKWidget  Gtk.Button "rotate" builder
     on rotateButton #clicked $ convolute rotate builder
-
+--use case of convolve:
     monochromeButton <- getGTKWidget  Gtk.Button "monochrome" builder
-    on monochromeButton #clicked $ convolute monochrome builder
+    on monochromeButton #clicked $ convolve blur builder
     return ()
 
-monochrome pb = do
-    bytestring <- PB.pixbufGetPixels pb
-    let arr = (Data.ByteString.unpack bytestring)
-    print arr
-    return (Just pb)
+--use case of mytransform (possible transofmrations: I.toImageY, I.flipV, I.flipH)
+--monochromeButton <- getGTKWidget  Gtk.Button "monochrome" builder
+--on monochromeButton #clicked $ mytransform I.toImageY builder
+--return ()
 
 getPixbufMetadata pb = do
     bytestring <- PB.pixbufGetPixels pb
@@ -77,17 +79,50 @@ getPixbufMetadata pb = do
 rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
 
-convolve mfilter pb = do
-    (myarr, cs, (myWidth, myHeight)) <- (getPixbufMetadata pb)
-    let grad_image = I.makeImageR cs (myWidth,myHeight) myarr
-    I.writeImage "../images/grad_attempt.png" grad_image
-    return ()
 
+mytransform transformation builder = do
+      hidimg <- I.readImageRGB I.VU "./src/images/hidimg.png"
+      let img = transformation hidimg
+      _ <- I.writeImage "./src/images/hidimg.png" img
+      _ <- updateCanvas builder
+      return ()
+
+convolve kernel builder = do
+      hidimg <- I.readImageRGB I.VU "./src/images/hidimg.png"
+      let img = I.convolve I.Reflect (I.fromLists kernel) hidimg
+      _ <- I.writeImage "./src/images/hidimg.png" img
+      _ <- updateCanvas builder
+      return ()
+
+updateCanvas builder = do
+  canvas <- getGTKWidget Gtk.Image "canvas" builder
+  check <- PB.pixbufGetFileInfo  "./src/images/hidimg.png"
+  case check of
+    (Just img, _, _) -> do
+        pb <- PB.pixbufNewFromFileAtSize  "./src/images/hidimg.png" 500 500
+        -- HEH
+        pbCopy <- PB.pixbufCopy pb
+        _ <- Gtk.imageSetFromPixbuf canvas pbCopy
+        -- activate buttons
+        activateButtons builder
+        return ()
+    _-> do
+        print "That file wasn't an image"
+        return ()
+  return ()
+
+sharpen,blur,emboss ::(Fractional a) => [[a]]
+sharpen = [[0,-1,0],[-1,5,-1],[0,-1,0]]
+blur = [[0.0625,0.125,0.0625],[0.125,0.25,0.125],[0.0625,0.125,0.0625]]
+emboss = [[-2,-1,0],[-1,1,1],[0,1,2]]
+outline = [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]]
 
 convolute convolution builder = do
     -- get img using canvas
     canvas <- getGTKWidget Gtk.Image "canvas" builder
     maybePixbuf <- Gtk.imageGetPixbuf canvas
+
+
 
     case maybePixbuf of
     -- if type of pixbuf is equal to "just pb"
