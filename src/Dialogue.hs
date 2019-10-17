@@ -62,7 +62,7 @@ activateButtons builder = do
 
 --use case of mytransform (possible transofmrations: I.toImageY, I.flipV, I.flipH)
 --monochromeButton <- getGTKWidget  Gtk.Button "monochrome" builder
---on monochromeButton #clicked $ mytransform I.toImageY builder
+--on monochromeButton #clicked $ mytransformation I.toImageY builder
 --return ()
 
 getPixbufMetadata pb = do
@@ -80,9 +80,9 @@ rotate pb = do
   PB.pixbufRotateSimple pb PB.PixbufRotationCounterclockwise
 
 
-mytransform transformation builder = do
+mytransformation func builder = do
       hidimg <- I.readImageRGB I.VU "./src/images/hidimg.png"
-      let img = transformation hidimg
+      img <- func hidimg
       _ <- I.writeImage "./src/images/hidimg.png" img
       _ <- updateCanvas builder
       return ()
