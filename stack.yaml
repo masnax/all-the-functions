@@ -5,3 +5,4 @@ extra-deps:
     - gi-gobject-2.0.22
     - gi-gdkpixbuf-2.0.23
     - gi-gdk-3.0.22
+    - hip-1.5.3.0

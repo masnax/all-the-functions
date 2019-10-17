@@ -14,7 +14,8 @@ executable Picksell
     gi-gtk == 3.0.*,
     gi-gobject == 2.0.*,
     gi-gdkpixbuf == 2.0.*,
-    gi-gdk == 3.0.*
+    gi-gdk == 3.0.*,
+    hip == 1.5.3.*
   Other-Modules:
     CssStyle,
     Dialogue,

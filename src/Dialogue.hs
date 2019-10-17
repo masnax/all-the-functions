@@ -4,6 +4,7 @@ module Dialogue where
 
 import qualified GI.Gtk as Gtk
 import qualified GI.GdkPixbuf as PB
+import Graphics.Image as I
 import Data.GI.Base
 import GI.GObject
 import Data.Text
@@ -78,8 +79,8 @@ rotate pb = do
 
 convolve mfilter pb = do
     (myarr, cs, (myWidth, myHeight)) <- (getPixbufMetadata pb)
-    let grad_image = makeImageR cs (myWidth,myHeight) myarr
-    writeImage "../images/grad_attempt.png" grad_image
+    let grad_image = I.makeImageR cs (myWidth,myHeight) myarr
+    I.writeImage "../images/grad_attempt.png" grad_image
     return ()
 
 
