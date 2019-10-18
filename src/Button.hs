@@ -6,11 +6,13 @@ import qualified Graphics.Image as I
 import Window
 import Convolutions
 
+-- Sets the interactivity of a button with the given id to the value of status
 setButtonActive :: [Char] -> Bool -> Gtk.Builder -> IO ()
 setButtonActive name status builder = do
     button <- getGTKWidget Gtk.Button name builder
     Gtk.widgetSetSensitive button status
 
+-- Adds listeners for all convolution buttons
 initializeButtons :: Gtk.Builder -> IO ()
 initializeButtons builder = do
     rotateButton <- getGTKWidget  Gtk.Button "rotate" builder
@@ -38,6 +40,7 @@ initializeButtons builder = do
     Gtk.on outlineButton #clicked $ convolve outline builder
     return ()
 
+-- Activates all convolution buttons
 setConvolutionsActive :: Bool -> Gtk.Builder -> IO ()
 setConvolutionsActive status builder = do
     button <- getGTKWidget  Gtk.Button "rotate" builder

@@ -14,7 +14,9 @@ import Button
 import Window
 import Convolutions
 
-
+{-
+Opens the OS' native file chooser and sends the filepath of the selected file to displayOnCanvas
+-}
 selectFile :: Gtk.Builder -> IO ()
 selectFile builder = do
     setWindowActive False builder
@@ -27,6 +29,13 @@ selectFile builder = do
         (Just file) -> displayOnCanvas file builder
         _ -> return ()
 
+{-
+Updates the canvas' pixbuf value to the image at the given filepath, if and only if it is an image.
+Image is converted to png and scaled to max 500x500px
+A copy is stored in the images directory
+Enables all buttons for image manipulation and exporting
+Passes original filepath to resetImage
+-}
 displayOnCanvas :: [Char] -> Gtk.Builder -> IO ()
 displayOnCanvas file builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
@@ -43,6 +52,11 @@ displayOnCanvas file builder = do
             setConvolutionsActive True builder
         _-> do print "That file wasn't an image"
 
+
+{-
+Sets the current pixbuf to the given image filepath.
+Filepath is the original image chosen via import
+-}
 resetImage :: [Char] -> Gtk.Builder -> IO ()
 resetImage file builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
@@ -55,6 +69,9 @@ resetImage file builder = do
             Gtk.imageSetFromPixbuf canvas pbCopy
         _-> return ()
 
+{-
+Opens OS' native file chooser for saving files. Saves the file as a png at the given location with the given name
+-}
 exportFile :: Gtk.Builder -> IO ()
 exportFile builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder

@@ -11,6 +11,10 @@ import Dialogue
 import Window
 import Button
 
+{-
+responsible for creating and destroying the window
+Upon creation, creates listeners for buttons
+-}
 main :: IO ()
 main = do
     Gtk.init Nothing
@@ -24,7 +28,7 @@ main = do
 
     on importButton #clicked $ selectFile builder
     on exportButton #clicked $ exportFile builder
-    setButtonActive "export" False builder 
+    setButtonActive "export" False builder
     initializeButtons builder
     setConvolutionsActive False builder
     on window #destroy Gtk.mainQuit
