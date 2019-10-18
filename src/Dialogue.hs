@@ -15,6 +15,7 @@ import Window
 import Convolutions
 
 
+selectFile :: Gtk.Builder -> IO ()
 selectFile builder = do
     setWindowActive False builder
     native <- new Gtk.FileChooserNative []
@@ -23,12 +24,10 @@ selectFile builder = do
     filename <-  Gtk.fileChooserGetFilename native
     setWindowActive True builder
     case filename of
-        (Just file) -> do
-            displayOnCanvas file builder
-            return ()
+        (Just file) -> displayOnCanvas file builder
         _ -> return ()
-    return ()
 
+displayOnCanvas :: [Char] -> Gtk.Builder -> IO ()
 displayOnCanvas file builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
     check <- PB.pixbufGetFileInfo file
@@ -38,16 +37,13 @@ displayOnCanvas file builder = do
             PB.pixbufSavev pb "./src/images/hidimg.png" "png" [] []
             pbCopy <- PB.pixbufCopy pb
             _ <- Gtk.imageSetFromPixbuf canvas pbCopy
-            -- activate buttons
             clearButton <- getGTKWidget  Gtk.Button "undo" builder
             on clearButton #clicked $ resetImage file builder
             setButtonActive "export" True builder
             setConvolutionsActive True builder
-        _-> do
-            print "That file wasn't an image"
-            return ()
-    return ()
+        _-> do print "That file wasn't an image"
 
+resetImage :: [Char] -> Gtk.Builder -> IO ()
 resetImage file builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
     check <- PB.pixbufGetFileInfo file
@@ -56,17 +52,13 @@ resetImage file builder = do
             pb <- PB.pixbufNewFromFileAtSize file 500 500
             PB.pixbufSavev pb "./src/images/hidimg.png" "png" [] []
             pbCopy <- PB.pixbufCopy pb
-            _ <- Gtk.imageSetFromPixbuf canvas pbCopy
-            return ()
-        _-> do
-            print "That file wasn't an image"
-            return ()
-    return ()
+            Gtk.imageSetFromPixbuf canvas pbCopy
+        _-> return ()
 
+exportFile :: Gtk.Builder -> IO ()
 exportFile builder = do
     canvas <- getGTKWidget Gtk.Image "canvas" builder
     maybePixbuf <- Gtk.imageGetPixbuf canvas
-
     case maybePixbuf of
         (Just pb) -> do
             setWindowActive False builder
@@ -79,6 +71,4 @@ exportFile builder = do
             case filename of
                 (Just file) -> PB.pixbufSavev pb (file ++ ".png") "png" [] []
                 _ -> return ()
-            return ()
         _ -> return ()
-    return()

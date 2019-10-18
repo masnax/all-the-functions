@@ -1,41 +1,44 @@
 {-# LANGUAGE OverloadedStrings, OverloadedLabels #-}
 
-module Button where 
+module Button where
 import qualified GI.Gtk as Gtk
 import qualified Graphics.Image as I
 import Window
 import Convolutions
 
-setButtonActive name status builder = do 
+setButtonActive :: [Char] -> Bool -> Gtk.Builder -> IO ()
+setButtonActive name status builder = do
     button <- getGTKWidget Gtk.Button name builder
     Gtk.widgetSetSensitive button status
 
+initializeButtons :: Gtk.Builder -> IO ()
 initializeButtons builder = do
     rotateButton <- getGTKWidget  Gtk.Button "rotate" builder
     Gtk.on rotateButton #clicked $ rotate builder
-    
+
     monochromeButton <- getGTKWidget  Gtk.Button "monochrome" builder
-    Gtk.on monochromeButton #clicked $ mytransformationY builder
-    
+    Gtk.on monochromeButton #clicked $ transformMonochrome builder
+
     flipvButton <- getGTKWidget  Gtk.Button "flipv" builder
-    Gtk.on flipvButton #clicked $ myVtransformationRGB builder
+    Gtk.on flipvButton #clicked $ transformFlipVertical builder
 
     fliphButton <- getGTKWidget  Gtk.Button "fliph" builder
-    Gtk.on fliphButton #clicked $ myHtransformationRGB builder
+    Gtk.on fliphButton #clicked $ transformFlipHorizontal builder
 
     sharpenButton <- getGTKWidget  Gtk.Button "sharpen" builder
     Gtk.on sharpenButton #clicked $ convolve sharpen builder
 
     blurButton <- getGTKWidget  Gtk.Button "blur" builder
     Gtk.on blurButton #clicked $ convolve blur builder
-   
+
     embossButton <- getGTKWidget  Gtk.Button "emboss" builder
     Gtk.on embossButton #clicked $ convolve emboss builder
-    
+
     outlineButton <- getGTKWidget  Gtk.Button "outline" builder
     Gtk.on outlineButton #clicked $ convolve outline builder
     return ()
 
+setConvolutionsActive :: Bool -> Gtk.Builder -> IO ()
 setConvolutionsActive status builder = do
     button <- getGTKWidget  Gtk.Button "rotate" builder
     Gtk.widgetSetSensitive button status
