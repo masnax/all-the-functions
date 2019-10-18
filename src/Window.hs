@@ -8,15 +8,18 @@ import Data.Maybe
 import Data.Text
 
 
-getGTKWidget :: (GI.GObject.GObject b) => (Data.GI.Base.ManagedPtr b -> b) ->  String ->  Gtk.Builder -> IO b
+getGTKWidget :: (GI.GObject.GObject w) => (Data.GI.Base.ManagedPtr w -> w) ->  String ->  Gtk.Builder -> IO w
 getGTKWidget gtkType id builder = do
     maybeWidget <- Gtk.builderGetObject builder (pack id)
     Gtk.unsafeCastTo gtkType (fromJust maybeWidget)
 
+setWindowActive :: Bool -> Gtk.Builder -> IO ()
 setWindowActive status builder = do
     window <- getGTKWidget Gtk.Window "window" builder
     Gtk.widgetSetSensitive window status
 
+killDialog :: Gtk.FileChooserNative -> Gtk.Builder -> IO ()
 killDialog dialog builder = do
     window <- getGTKWidget Gtk.Window "window" builder
     on window #destroy $ Gtk.nativeDialogDestroy dialog
+    return ()
